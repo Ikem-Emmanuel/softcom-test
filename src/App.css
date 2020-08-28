@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.theme-light {
+	--bg-background-primary: #fff;
+	--text-copy-primary: #7e7e7e
+}
+
+.theme-dark {
+	--bg-background-primary: #27292D;
+	--text-copy-primary: #fff
+}
