@@ -1,29 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
-function App()
-{
-	
-	const [theme, setTheme] = useState("dark");
+function App() {
+	const [theme, setTheme] = useState(true);
+	let stateIndex = 0;
+	let stateChange = ['full', 'compact', 'minimized'];
+	const [layout, setLayout] = useState(stateChange);
 
-	useEffect((theme) => {
-		setTheme("dark")
-	}, [])
+	const layoutChange = e => {
+		let newStateindex = (stateIndex + 1) % stateChange.length;
+		let stateIndex = newStateindex;
+		// setLayout(newState);
+		console.log(stateIndex);
+	};
 
-	const toggleTheme = (theme) =>
-	{
-		if (theme === "dark")
-			console.log("white")
-		else
-		{
-			setTheme("dark")
-		}
-		return theme
+	// const [layout, setLayout] = useState();
+
+	// const layoutChange = e => {
+	// 	if (layout === 'full') {
+	// 		setLayout('compact');
+	// 	}
+	// 	console.log(layout);
+	// };
+
+	const toggleTheme = e => {
+		setTheme(!theme);
 	};
 
 	return (
 		<div className='App'>
 			<div className='w-full min-h-screen bg-gray-900 flex items-center justify-center px-6'>
-				<div className={`theme-${theme} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/5 md:w-2/4 w-full`}>
+				<div
+					className={`theme-${
+						theme ? 'dark' : 'light'
+					} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/5 md:w-2/4 w-full`}>
 					<div className='pt-2 pb-1 flex items-start justify-between w-full px-5'>
 						<div>
 							<h3
@@ -32,40 +41,43 @@ function App()
 								POS FAILURE RATE
 							</h3>
 						</div>
-						<div className='flex items-center space-x-3'>
+						<div className='text-copy-primary flex items-center space-x-4'>
 							<div>
-								<button className='focus:outline-none'>
+								<button className='focus:outline-none' onClick={layoutChange}>
 									<svg
-										className='w-5'
+										className='w-5 fill-current text-copy-primary'
 										xmlns='http://www.w3.org/2000/svg'
 										fill='none'
 										viewBox='0 0 18 18'>
-										<path
-											fill='#fff'
-											d='M13.8 0H1.2A1.2 1.2 0 000 1.3v12.4A1.3 1.3 0 001.3 15h12.4a1.3 1.3 0 001.3-1.3V1.3A1.3 1.3 0 0013.7 0zm-.4 6.9h-8a.3.3 0 01-.4-.3v-5a.3.3 0 01.3-.4h8.1a.3.3 0 01.3.4v5a.3.3 0 01-.3.3zM1.6 1.2h1.8a.3.3 0 01.4.4v11.8a.3.3 0 01-.4.3H1.6a.3.3 0 01-.4-.3V1.6a.3.3 0 01.4-.4zM5 13.4v-5a.3.3 0 01.3-.3h8.1a.3.3 0 01.3.3v5a.3.3 0 01-.3.3h-8a.3.3 0 01-.4-.3z'
-										/>
+										<path d='M13.8 0H1.2A1.2 1.2 0 000 1.3v12.4A1.3 1.3 0 001.3 15h12.4a1.3 1.3 0 001.3-1.3V1.3A1.3 1.3 0 0013.7 0zm-.4 6.9h-8a.3.3 0 01-.4-.3v-5a.3.3 0 01.3-.4h8.1a.3.3 0 01.3.4v5a.3.3 0 01-.3.3zM1.6 1.2h1.8a.3.3 0 01.4.4v11.8a.3.3 0 01-.4.3H1.6a.3.3 0 01-.4-.3V1.6a.3.3 0 01.4-.4zM5 13.4v-5a.3.3 0 01.3-.3h8.1a.3.3 0 01.3.3v5a.3.3 0 01-.3.3h-8a.3.3 0 01-.4-.3z' />
 									</svg>
 								</button>
 							</div>
 							<div>
 								<button className='focus:outline-none' onClick={toggleTheme}>
-									<svg
-										className='h-5'
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 18 18'>
-										<path
-											fill='#fff'
-											d='M9 12.4a3.4 3.4 0 100-6.8 3.4 3.4 0 000 6.8z'
-										/>
-										<path
-											stroke='#fff'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-											strokeWidth='1.5'
-											d='M9 1.1v2.3M9 14.6V17M16.9 9h-2.3M3.4 9H1M14.6 3.4L13 5M5 13l-1.6 1.6M14.6 14.6L13 13M5 5L3.4 3.4'
-										/>
-									</svg>
+									{theme ? (
+										<svg
+											className='h-5 -mt-5 fill-current text-copy-primary'
+											xmlns='http://www.w3.org/2000/svg'
+											fill='none'
+											viewBox='0 0 18 18'>
+											<path d='M9 12.4a3.4 3.4 0 100-6.8 3.4 3.4 0 000 6.8z' />
+											<path
+												stroke='#fff'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth='1.5'
+												d='M9 1.1v2.3M9 14.6V17M16.9 9h-2.3M3.4 9H1M14.6 3.4L13 5M5 13l-1.6 1.6M14.6 14.6L13 13M5 5L3.4 3.4'
+											/>
+										</svg>
+									) : (
+										<svg
+											className='h-4 -mt-5 fill-current text-copy-primary'
+											xmlns='http://www.w3.org/2000/svg'
+											viewBox='0 0 15 15'>
+											<path d='M12 10.1A7.3 7.3 0 015 .7a7.3 7.3 0 1010 8.7c-1 .5-2 .7-3 .7z' />
+										</svg>
+									)}
 								</button>
 							</div>
 						</div>
