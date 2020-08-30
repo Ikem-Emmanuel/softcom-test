@@ -1,6 +1,10 @@
 module.exports = {
 	purge: [],
 	theme: {
+		fontFamily: {
+			sans: ['Avenir', 'Avenir', 'sans-serif'],
+			Avenir: ['Avenir'],
+		},
 		extend: {
 			colors: {
 				// primary: 'var(--bg-background-primary)',
@@ -24,7 +28,7 @@ module.exports = {
 						main: '#28B759',
 						sub: '#35BB63',
 					},
-					gray: {
+					black: {
 						main: '#27292D',
 						sub: '#7E7E7E',
 						ternary: '#9BA1B5',
@@ -32,6 +36,10 @@ module.exports = {
 				},
 
 				copy: {
+					primary: 'var(--text-copy-primary)',
+				},
+
+				progressbar: {
 					primary: 'var(--text-copy-primary)',
 				},
 

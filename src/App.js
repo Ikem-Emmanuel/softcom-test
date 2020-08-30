@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 
 function App() {
 	const [theme, setTheme] = useState(true);
+	// const [cardSwitch, setcardSwitch] = useState(false);
 
 	let layoutOptions = ['FULL', 'COMPACT', 'MINIMIZED'];
 	const [selectedLayout, setSelectedLayout] = useState('FULL');
 	const [layoutIndex, setLayoutIndex] = useState(0);
-	// let [layout, setLayout] = useState({full:true, compact:false, minimized:false})
 
 	const toggleView = () => {
 		let index = (layoutIndex + 1) % layoutOptions.length;
@@ -27,12 +27,13 @@ function App() {
 
 		if (selectedLayout === 'FULL') {
 			// setLayout({full:true, compact:false, minimized:false})
-			obj = {full: true, compact: false, minimized: false};
+			obj = { full: true, compact: false, minimized: false };
 		}
 
 		if (selectedLayout === 'MINIMIZED') {
 			// setLayout({full:false, compact:false, minimized:true})
 			obj = {full: false, compact: false, minimized: true};
+			
 		}
 
 		if (selectedLayout === 'COMPACT') {
@@ -57,7 +58,7 @@ function App() {
 					<div className='pt-2 pb-1 flex items-start justify-between w-full px-5'>
 						<div>
 							<h3
-								className='font-medium text-light leading-tight tracking-widest'
+								className='font-medium leading-tight tracking-widest'
 								style={{fontSize: '10px'}}>
 								POS FAILURE RATE
 							</h3>
@@ -84,7 +85,7 @@ function App() {
 											viewBox='0 0 18 18'>
 											<path d='M9 12.4a3.4 3.4 0 100-6.8 3.4 3.4 0 000 6.8z' />
 											<path
-												stroke='#fff'
+												stroke='#7E7E7E'
 												strokeLinecap='round'
 												strokeLinejoin='round'
 												strokeWidth='1.5'
@@ -103,102 +104,148 @@ function App() {
 							</div>
 						</div>
 					</div>
-					<div className='pt-1 pb-2 px-5 relative'>
-						<div className='flex items-center'>
-							<div className='flex items-center'>
-								<div>
-									<h4
-										className='pr-2 font-black leading-none'
-										style={{color: '#4F63FF', fontSize: '36px'}}>
-										{' '}
-										12%
-									</h4>
+					{getLayout().minimized ? (
+						<div className='py-2 relative'>
+							<div className=''>
+								<div className='flex px-5 items-center'>
+									<div>
+										<h4
+											className='pr-2 font-bold leading-none'
+											style={{color: '#4F63FF', fontSize: '40px'}}>
+											{' '}
+											60%
+										</h4>
+									</div>
+									<div className='pt-3 px-1'>
+										<svg
+											className='fill-current h-2 w-2'
+											fill='none'
+											xmlns='http://www.w3.org/2000/svg'
+											viewBox='0 0 10 8'>
+											<path d='M5 0l4.3 7.5H.7L5 0z' fill='#FF005C' />
+										</svg>
+									</div>
+									<div>
+										<p
+											className='text-center pt-3 font-light leading-none'
+											style={{color: '#FF005C', fontSize: '14px'}}>
+											8%
+										</p>
+									</div>
 								</div>
-								<div className='pt-4 px-1'>
-									<svg
-										className='fill-current h-2 w-2'
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 10 8'>
-										<path fill='#28B759' d='M5 8L9.3.5H.7L5 8z' />
-									</svg>
-								</div>
-								<div>
-									<p
-										className='text-center pt-3 font-light leading-none'
-										style={{color: '#28B759', fontSize: '14px'}}>
-										14%
-									</p>
-								</div>
-							</div>
-							<div className='py-1 relative w-1/2 ml-auto rounded-full'>
-								<div className='h-1 bg-gray-200 rounded-full'>
+								<div className='pt-4 px-2 relative rounded-full'>
 									<div
-										className='absolute h-1 rounded-full xl:w-24 md:w-24 lg:w-32  w-21'
-										style={{backgroundColor: '#35BB63'}}
-									/>
-									<div
-										className='absolute h-3 flex items-center justify-center w-3  rounded-full bg-white shadow-2xl border-solid border-4 -ml-2 top-0 cursor-pointer'
-										unselectable='on'
-										style={{
-											left: '61%',
-											borderColor: '#35BB63',
-											backdropFilter: 'blur(500px)',
-										}}>
-										<div className='relative -mt-2 w-1 rounded-full'>
-											<div
-												className='absolute z-40 opacity-100 bottom-100 mb-2 left-0 min-w-full'
-												style={{marginLeft: '-20.5px'}}
-											/>
-										</div>
+										className={`theme-${
+											theme ? 'dark' : 'light'
+										} bg-background-secondary h-1 rounded-full`}>
+										<div
+											className='absolute h-1 rounded-full xl:w-2/3 md:w-2/3 lg:w-2/3  w-2/3'
+											style={{backgroundColor: '#FF005C'}}
+										/>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className='pt-1 pb-4 px-5 w-full'>
-						<div className='flex items-center justify-end'>
-							<div>
-								<svg
-									className='h-3 w-3'
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 10 10'>
-									<path
-										fill='#9ba1b5'
-										d='M5 0a5 5 0 100 10A5 5 0 005 0zm1.2 7.7H3.9a.4.4 0 110-.9h.6a.1.1 0 00.1-.1V4.5a.1.1 0 00-.1-.2h-.6a.4.4 0 110-.8h.6a1 1 0 011 1v2.2a.1.1 0 00.1.1h.6a.4.4 0 110 .9zM5 1.4a.7.7 0 110 1.4.7.7 0 010-1.4z'
-									/>
-								</svg>
+					) : (
+						<div>
+							<div className='pt-1 pb-2 px-5 relative'>
+								<div className='flex items-center'>
+									<div className='flex items-center'>
+										<div>
+											<h4
+												className='pr-2 font-black leading-none'
+												style={{color: '#4F63FF', fontSize: '36px'}}>
+												{' '}
+												12%
+											</h4>
+										</div>
+										<div className='pt-4 px-1'>
+											<svg
+												className='fill-current h-2 w-2'
+												xmlns='http://www.w3.org/2000/svg'
+												fill='none'
+												viewBox='0 0 10 8'>
+												<path fill='#28B759' d='M5 8L9.3.5H.7L5 8z' />
+											</svg>
+										</div>
+										<div>
+											<p
+												className='text-center pt-3 font-light leading-none'
+												style={{color: '#28B759', fontSize: '14px'}}>
+												14%
+											</p>
+										</div>
+									</div>
+									<div className='py-1 relative w-1/2 ml-auto rounded-full'>
+										<div className='h-1 bg-background-secondary rounded-full'>
+											<div
+												className='absolute h-1 rounded-full xl:w-24 md:w-24 lg:w-32  w-21'
+												style={{backgroundColor: '#35BB63'}}
+											/>
+											<div
+												className='absolute h-3 flex items-center justify-center w-3  rounded-full bg-white shadow-2xl border-solid border-4 -ml-2 top-0 cursor-pointer'
+												unselectable='on'
+												style={{
+													left: '61%',
+													borderColor: '#35BB63',
+													backdropFilter: 'blur(500px)',
+												}}>
+												<div className='relative -mt-2 w-1 rounded-full'>
+													<div
+														className='absolute z-40 opacity-100 bottom-100 mb-2 left-0 min-w-full'
+														style={{marginLeft: '-20.5px'}}
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div className='px-1'>
-								<p
-									className='text-center font-light leading-none tracking-wider'
-									style={{color: '#939496', fontSize: '8px'}}>
-									Source{' '}
-									<span
-										className='font-medium'
-										style={{color: '#9ba1b5', fontSize: '9px'}}>
-										NIBSS
-									</span>
-								</p>
+							<div className='pt-1 pb-4 px-5 w-full'>
+								<div className='flex items-center justify-end'>
+									<div>
+										<svg
+											className='h-3 w-3'
+											xmlns='http://www.w3.org/2000/svg'
+											fill='none'
+											viewBox='0 0 10 10'>
+											<path
+												fill='#9ba1b5'
+												d='M5 0a5 5 0 100 10A5 5 0 005 0zm1.2 7.7H3.9a.4.4 0 110-.9h.6a.1.1 0 00.1-.1V4.5a.1.1 0 00-.1-.2h-.6a.4.4 0 110-.8h.6a1 1 0 011 1v2.2a.1.1 0 00.1.1h.6a.4.4 0 110 .9zM5 1.4a.7.7 0 110 1.4.7.7 0 010-1.4z'
+											/>
+										</svg>
+									</div>
+									<div className='px-1'>
+										<p
+											className='text-center font-light leading-none tracking-wider'
+											style={{color: '#939496', fontSize: '8px'}}>
+											Source{' '}
+											<span
+												className='font-medium'
+												style={{color: '#9ba1b5', fontSize: '9px'}}>
+												NIBSS
+											</span>
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
+					)}
 					{getLayout().full && (
 						<div className='w-3/3'>
 							<div
 								className='flex items-center text-center'
 								style={{
-									borderTopWidth: '0.032em',
+									borderTopWidth: '0.01rem',
 									borderColor: 'rgb(211,211,211,0.75)',
 								}}>
 								<div
-									className='border-r-2 py-3 rounded-bl-md leading-none w-1/3'
+									className={`theme-${
+										theme ? 'dark' : 'light'
+									} border-r-2 py-3 bg-background-secondary text-copy-primary rounded-bl-md leading-none w-1/3`}
 									style={{
-										backgroundColor: '#383b40',
 										fontSize: '12px',
-										color: '#fff',
-										borderRightWidth: '0.032em',
+										borderRightWidth: '0.01rem',
 										borderColor: 'rgb(211,211,211,0.75)',
 									}}>
 									<p>Daily</p>
@@ -207,15 +254,12 @@ function App() {
 									className='border-r-2 py-3 leading-none w-1/3'
 									style={{
 										fontSize: '12px',
-										color: '#939496',
-										borderRightWidth: '0.032em',
+										borderRightWidth: '0.01em',
 										borderColor: 'rgb(211,211,211,0.75)',
 									}}>
 									<p>Monthly</p>
 								</div>
-								<div
-									className='py-3 leading-none w-1/3'
-									style={{fontSize: '12px', color: '#939496'}}>
+								<div className='py-3 leading-none w-1/3' style={{fontSize: '12px'}}>
 									Yearly
 								</div>
 							</div>

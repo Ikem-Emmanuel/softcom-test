@@ -5,10 +5,13 @@
 
 .theme-light {
 	--bg-background-primary: #fff;
-	--text-copy-primary: #7e7e7e
+	--text-copy-primary: #7e7e7e;
+	--bg-background-secondary: #f2f2f2;
+
 }
 
 .theme-dark {
 	--bg-background-primary: #27292D;
-	--text-copy-primary: #fff
+	--text-copy-primary: #7E7E7E;
+	--bg-background-secondary: #383B40;
 }
