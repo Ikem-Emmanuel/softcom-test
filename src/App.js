@@ -2,25 +2,46 @@ import React, {useState} from 'react';
 
 function App() {
 	const [theme, setTheme] = useState(true);
-	let stateIndex = 0;
-	let stateChange = ['full', 'compact', 'minimized'];
-	const [layout, setLayout] = useState(stateChange);
 
-	const layoutChange = e => {
-		let newStateindex = (stateIndex + 1) % stateChange.length;
-		let stateIndex = newStateindex;
-		// setLayout(newState);
-		console.log(stateIndex);
+	let layoutOptions = ['FULL', 'COMPACT', 'MINIMIZED'];
+	const [selectedLayout, setSelectedLayout] = useState('FULL');
+	const [layoutIndex, setLayoutIndex] = useState(0);
+	// let [layout, setLayout] = useState({full:true, compact:false, minimized:false})
+
+	const toggleView = () => {
+		let index = (layoutIndex + 1) % layoutOptions.length;
+		// update layout index
+		setLayoutIndex(index);
+
+		// Set layout value to that of the layout option at that particular index
+		setSelectedLayout(layoutOptions[index]);
 	};
 
-	// const [layout, setLayout] = useState();
+	// <Button onPress>
+	// <button text='Toggle View' className='focus:outline-none' onClick={toggleView()}></button>;
 
-	// const layoutChange = e => {
-	// 	if (layout === 'full') {
-	// 		setLayout('compact');
-	// 	}
-	// 	console.log(layout);
-	// };
+	const getLayout = () => {
+		let obj = {};
+
+		// selectedLayout === 'FULL' ? {full: true, compact: false, minimized: false} : null};
+
+		if (selectedLayout === 'FULL') {
+			// setLayout({full:true, compact:false, minimized:false})
+			obj = {full: true, compact: false, minimized: false};
+		}
+
+		if (selectedLayout === 'MINIMIZED') {
+			// setLayout({full:false, compact:false, minimized:true})
+			obj = {full: false, compact: false, minimized: true};
+		}
+
+		if (selectedLayout === 'COMPACT') {
+			// setLayout({full:false, compact:true, minimized:false})
+			obj = {full: false, compact: true, minimized: false};
+		}
+
+		return obj;
+	};
 
 	const toggleTheme = e => {
 		setTheme(!theme);
@@ -32,7 +53,7 @@ function App() {
 				<div
 					className={`theme-${
 						theme ? 'dark' : 'light'
-					} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/5 md:w-2/4 w-full`}>
+					} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/4 md:w-2/4 w-full`}>
 					<div className='pt-2 pb-1 flex items-start justify-between w-full px-5'>
 						<div>
 							<h3
@@ -43,7 +64,7 @@ function App() {
 						</div>
 						<div className='text-copy-primary flex items-center space-x-4'>
 							<div>
-								<button className='focus:outline-none' onClick={layoutChange}>
+								<button className='focus:outline-none' onClick={toggleView}>
 									<svg
 										className='w-5 fill-current text-copy-primary'
 										xmlns='http://www.w3.org/2000/svg'
@@ -163,41 +184,43 @@ function App() {
 							</div>
 						</div>
 					</div>
-					<div className='w-3/3'>
-						<div
-							className='flex items-center text-center'
-							style={{
-								borderTopWidth: '0.032em',
-								borderColor: 'rgb(211,211,211,0.75)',
-							}}>
+					{getLayout().full && (
+						<div className='w-3/3'>
 							<div
-								className='border-r-2 py-3 rounded-bl-md leading-none w-1/3'
+								className='flex items-center text-center'
 								style={{
-									backgroundColor: '#383b40',
-									fontSize: '12px',
-									color: '#fff',
-									borderRightWidth: '0.032em',
+									borderTopWidth: '0.032em',
 									borderColor: 'rgb(211,211,211,0.75)',
 								}}>
-								<p>Daily</p>
-							</div>
-							<div
-								className='border-r-2 py-3 leading-none w-1/3'
-								style={{
-									fontSize: '12px',
-									color: '#939496',
-									borderRightWidth: '0.032em',
-									borderColor: 'rgb(211,211,211,0.75)',
-								}}>
-								<p>Monthly</p>
-							</div>
-							<div
-								className='py-3 leading-none w-1/3'
-								style={{fontSize: '12px', color: '#939496'}}>
-								Yearly
+								<div
+									className='border-r-2 py-3 rounded-bl-md leading-none w-1/3'
+									style={{
+										backgroundColor: '#383b40',
+										fontSize: '12px',
+										color: '#fff',
+										borderRightWidth: '0.032em',
+										borderColor: 'rgb(211,211,211,0.75)',
+									}}>
+									<p>Daily</p>
+								</div>
+								<div
+									className='border-r-2 py-3 leading-none w-1/3'
+									style={{
+										fontSize: '12px',
+										color: '#939496',
+										borderRightWidth: '0.032em',
+										borderColor: 'rgb(211,211,211,0.75)',
+									}}>
+									<p>Monthly</p>
+								</div>
+								<div
+									className='py-3 leading-none w-1/3'
+									style={{fontSize: '12px', color: '#939496'}}>
+									Yearly
+								</div>
 							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</div>
