@@ -1,5 +1,5 @@
 /*
-	Developed by IKEM EMMANUEL, based on the given User interface (UI), in fulfillment of the Softcom test for the role of an interface developer
+	Developed by IKEM EMMANUEL, based on the given User interface (UI) from SOFTCOM, in fulfillment of the test for the role of an interface developer
 */
 
 import React, { useState } from 'react';
@@ -55,8 +55,6 @@ function App()
 		}
 
 		return obj;
-
-		boty()
 	};
 
 
@@ -71,7 +69,7 @@ function App()
 				<div
 					className={`theme-${
 						theme ? 'dark' : 'light'
-					} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/4 md:w-2/4 w-full`}>
+					} bg-background-primary text-copy-primary rounded-md shadow-xl pt-3  xl:w-1/3 lg:w-1/3 md:w-3/6 w-full`}>
 					<div className='pt-2 pb-1 flex items-start justify-between w-full px-5'>
 						<div>
 							<h3
@@ -193,10 +191,10 @@ function App()
 											</p>
 										</div>
 									</div>
-									<div className='py-1 relative w-1/2 ml-auto rounded-full'>
+									<div className='py-1 relative w-1/3 md:w-1/2 ml-auto lg:w-2/5 rounded-full flex-shrink-0'>
 										<div className='h-1 bg-background-secondary rounded-full'>
 											<div
-												className='absolute h-1 rounded-full xl:w-24 md:w-24 lg:w-32  w-21'
+												className='absolute h-1 rounded-full xl:w-24 sm:w-28 md:w-27 lg:w-16  w-20'
 												style={{backgroundColor: '#35BB63'}}
 											/>
 											<div
