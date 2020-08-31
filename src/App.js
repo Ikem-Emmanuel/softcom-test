@@ -1,15 +1,32 @@
-import React, {useState} from 'react';
+/*
+	Developed by IKEM EMMANUEL, based on the given User interface (UI), in fulfillment of the Softcom test for the role of an interface developer
+*/
 
-function App() {
+import React, { useState } from 'react';
+
+function App()
+{
+	
+	// Defining the theme state as a boolean value of true and false :where true is the dark mode and false is the light moode
 	const [theme, setTheme] = useState(true);
-	// const [cardSwitch, setcardSwitch] = useState(false);
 
+	// layoutOption are the three view mode for the card
 	let layoutOptions = ['FULL', 'COMPACT', 'MINIMIZED'];
+
+	// this is the initial layout that will be loaded when the component mounts for the first time
 	const [selectedLayout, setSelectedLayout] = useState('FULL');
+
+	// Based on the layoutOption Array index which is 0, 1, 2 : the layoutIndex represent each card view in the layoutOption based on the index
 	const [layoutIndex, setLayoutIndex] = useState(0);
 
-	const toggleView = () => {
+
+	// This function Updates the selectedLayout state and then returns a value of either 'Full', 'Compact', 'Minimized'
+	const toggleView = () =>
+	{
+		
+		// Adding one to the layout index to increament it and the gotten value Modules 3 since the lenght of the layoutOption array is 3 : this prevent the increament from going pass 3 index
 		let index = (layoutIndex + 1) % layoutOptions.length;
+
 		// update layout index
 		setLayoutIndex(index);
 
@@ -17,13 +34,9 @@ function App() {
 		setSelectedLayout(layoutOptions[index]);
 	};
 
-	// <Button onPress>
-	// <button text='Toggle View' className='focus:outline-none' onClick={toggleView()}></button>;
-
+	// THis function gets the selectedLayout value genereated by the toggle view function and set each layout Option as true or false based on the slectedLayout value
 	const getLayout = () => {
 		let obj = {};
-
-		// selectedLayout === 'FULL' ? {full: true, compact: false, minimized: false} : null};
 
 		if (selectedLayout === 'FULL') {
 			// setLayout({full:true, compact:false, minimized:false})
@@ -42,8 +55,12 @@ function App() {
 		}
 
 		return obj;
+
+		boty()
 	};
 
+
+	// This function sets the initial theme state which true to false.
 	const toggleTheme = e => {
 		setTheme(!theme);
 	};
